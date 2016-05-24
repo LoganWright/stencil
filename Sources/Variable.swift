@@ -28,7 +28,7 @@ class FilterExpression : Resolvable {
     }
   }
   
-  func resolve(context: Context) throws -> Any? {
+  func resolve(_ context: Context) throws -> Any? {
     let result = try variable.resolve(context)
     
     return try filters.reduce(result) { x, y in
@@ -55,12 +55,12 @@ public struct Variable : Equatable, Resolvable {
   }
   
   /// Resolve the variable in the given context
-  public func resolve(context: Context) throws -> Any? {
+  public func resolve(_ context: Context) throws -> Any? {
     var current: Any? = context
     
     if (variable.hasPrefix("'") && variable.hasSuffix("'")) || (variable.hasPrefix("\"") && variable.hasSuffix("\"")) {
       // String literal
-      return variable[variable.startIndex.successor() ..< variable.endIndex.predecessor()]
+      return variable[variable.index(after:variable.startIndex) ..< variable.index(before:variable.endIndex)]
     }
     
     for bit in lookup() {
@@ -104,7 +104,7 @@ public func ==(lhs: Variable, rhs: Variable) -> Bool {
 }
 
 
-func normalize(current: Any?) -> Any? {
+func normalize(_ current: Any?) -> Any? {
   if let current = current as? Normalizable {
     return current.normalize()
   }

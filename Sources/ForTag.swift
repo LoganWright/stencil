@@ -37,7 +37,7 @@ public class ForNode : NodeType {
     self.emptyNodes = emptyNodes
   }
   
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let values = try variable.resolve(context)
     
     if let values = values as? [Any] where values.count > 0 {

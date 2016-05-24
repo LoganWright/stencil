@@ -18,7 +18,7 @@ public class Template {
       }
     #else
       let useBundle = bundle ??  NSBundle.main()
-      guard let url = useBundle.url(forResource: named, withExtension: nil) else {
+      guard let url = useBundle.urlForResource(named, withExtension: nil) else {
         throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
       }
     #endif
@@ -44,7 +44,7 @@ public class Template {
   }
   
   /// Render the given template
-  public func render(context: Context? = nil) throws -> String {
+  public func render(_ context: Context? = nil) throws -> String {
     let context = context ?? Context()
     let parser = TokenParser(tokens: tokens, namespace: context.namespace)
     let nodes = try parser.parse()

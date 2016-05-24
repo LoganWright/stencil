@@ -55,7 +55,7 @@ public class IfNode : NodeType {
     self.falseNodes = falseNodes
   }
 
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let result = try variable.resolve(context)
     var truthy = false
 

@@ -1,4 +1,4 @@
-func toString(value: Any?) -> String? {
+func toString(_ value: Any?) -> String? {
   if let value = value as? String {
     return value
   } else if let value = value as? CustomStringConvertible {
@@ -10,7 +10,7 @@ func toString(value: Any?) -> String? {
 
 func capitalise(value: Any?) -> Any? {
   if let value = toString(value) {
-    return value.capitalizedString
+    return value.capitalized
   }
 
   return value
@@ -18,7 +18,7 @@ func capitalise(value: Any?) -> Any? {
 
 func uppercase(value: Any?) -> Any? {
   if let value = toString(value) {
-    return value.uppercaseString
+    return value.uppercased()
   }
 
   return value
@@ -26,7 +26,7 @@ func uppercase(value: Any?) -> Any? {
 
 func lowercase(value: Any?) -> Any? {
   if let value = toString(value) {
-    return value.lowercaseString
+    return value.lowercased()
   }
 
   return value
