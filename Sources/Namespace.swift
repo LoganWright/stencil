@@ -33,7 +33,7 @@ public class Namespace {
   }
   
   /// Registers a simple template tag with a name and a handler
-  public func registerSimpleTag(_ name: String, handler: Context throws -> String) {
+  public func registerSimpleTag(_ name: String, handler: (Context) throws -> String) {
     registerTag(name, parser: { parser, token in
       return SimpleNode(handler: handler)
     })

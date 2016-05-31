@@ -1,6 +1,3 @@
-import PathKit
-
-
 public class IncludeNode : NodeType {
   public let templateName: Variable
   
@@ -28,11 +25,7 @@ public class IncludeNode : NodeType {
     }
     
     guard let template = loader.loadTemplate(templateName) else {
-      #if !swift(>=3.0)
-        let paths = loader.paths.map { $0.description }.joinWithSeparator(", ")
-      #else
-        let paths = loader.paths.map { $0.description }.joined(separator:", ")
-      #endif
+      let paths = loader.paths.joined(separator:", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
     

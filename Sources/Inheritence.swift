@@ -37,7 +37,7 @@ extension Collection {
     return nil
   }
   #else
-  func any(closure: Iterator.Element -> Bool) -> Iterator.Element? {
+  func any(closure: (Iterator.Element) -> Bool) -> Iterator.Element? {
     for element in self {
       if closure(element) {
         return element
@@ -93,11 +93,7 @@ class ExtendsNode : NodeType {
     }
     
     guard let template = loader.loadTemplate(templateName) else {
-      #if !swift(>=3.0)
-        let paths:String = loader.paths.map { $0.description }.joinWithSeparator(", ")
-      #else
-        let paths:String = loader.paths.map { $0.description }.joined(separator:", ")
-      #endif
+      let paths:String = loader.paths.joined(separator:", ")
       throw TemplateSyntaxError("'\(templateName)' template not found in \(paths)")
     }
     

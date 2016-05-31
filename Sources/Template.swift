@@ -1,5 +1,5 @@
 import Foundation
-import PathKit
+//import PathKit
 
 #if os(Linux)
 let NSFileNoSuchFileError = 4
@@ -9,32 +9,10 @@ let NSFileNoSuchFileError = 4
 public class Template {
   let tokens: [Token]
   
-  /// Create a template with the given name inside the given bundle
-  public convenience init(named:String, inBundle bundle:NSBundle? = nil) throws {
-    #if !swift(>=3.0)
-      let useBundle = bundle ??  NSBundle.mainBundle()
-      guard let url = useBundle.URLForResource(named, withExtension: nil) else {
-      throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
-      }
-    #else
-      let useBundle = bundle ??  NSBundle.main()
-      guard let url = useBundle.urlForResource(named, withExtension: nil) else {
-        throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
-      }
-    #endif
-    
-    
-    try self.init(URL:url)
-  }
-  
   /// Create a template with a file found at the given URL
-  public convenience init(URL:NSURL) throws {
-    try self.init(path: Path(URL.path!))
-  }
-  
-  /// Create a template with a file found at the given path
-  public convenience init(path:Path) throws {
-    self.init(templateString: try path.read())
+  public convenience init(URL: String) throws {
+    let data = try String(contentsOfFile: URL)
+    self.init(templateString: data)
   }
   
   /// Create a template with a template string

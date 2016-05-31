@@ -35,9 +35,9 @@ public func renderNodes(_ nodes:[NodeType], _ context:Context) throws -> String 
 }
 
 public class SimpleNode : NodeType {
-  let handler:Context throws -> String
+  let handler:(Context) throws -> String
   
-  public init(handler:Context throws -> String) {
+  public init(handler:(Context) throws -> String) {
     self.handler = handler
   }
   

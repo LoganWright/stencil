@@ -12,7 +12,7 @@ public func until(_ tags: [String]) -> ((TokenParser, Token) -> Bool) {
   }
 }
 
-public typealias Filter = Any? throws -> Any?
+public typealias Filter = (Any?) throws -> Any?
 
 /// A class for parsing an array of tokens and converts them into a collection of Node's
 public class TokenParser {
